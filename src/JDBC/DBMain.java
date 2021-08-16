@@ -14,7 +14,5 @@ public class DBMain {
         for(Car c: cars){
             System.out.println(c.toString());
         }
-
-        System.out.println("Hello");
     }
 }
