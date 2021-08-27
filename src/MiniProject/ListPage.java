@@ -3,6 +3,8 @@ package MiniProject;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
@@ -28,6 +30,14 @@ public class ListPage extends JPanel {
         button.setSize(100, 30);
         button.setLocation(200, 420);
         add(button);
+
+        button.addActionListener(new ActionListener( ) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                parent.getListPage().setVisible(false);
+                parent.getMenu().setVisible(true);
+            }
+        });
     }
 
     public void generateTable(ArrayList <Student> list){

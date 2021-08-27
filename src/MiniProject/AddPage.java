@@ -18,33 +18,33 @@ public class AddPage extends JPanel {
         setLayout(null);
 
         JLabel name = new JLabel("NAME: ");
-        name.setSize(50, 30);
+        name.setSize(70, 30);
         name.setLocation(100, 100);
         add(name);
 
         JTextField nameText = new JTextField("");
-        nameText.setSize(100, 30);
-        nameText.setLocation(250, 100);
+        nameText.setSize(200, 30);
+        nameText.setLocation(200, 100);
         add(nameText);
 
         JLabel surname = new JLabel("SURNAME: ");
-        surname.setSize(50, 30);
+        surname.setSize(70, 30);
         surname.setLocation(100, 150);
         add(surname);
 
         JTextField surnameText = new JTextField("");
-        surnameText.setSize(100, 30);
-        surnameText.setLocation(250, 150);
+        surnameText.setSize(200, 30);
+        surnameText.setLocation(200, 150);
         add(surnameText);
 
         JLabel age = new JLabel("AGE: ");
-        age.setSize(50, 30);
+        age.setSize(70, 30);
         age.setLocation(100, 200);
         add(age);
 
         JTextField ageText = new JTextField("");
-        ageText.setSize(100, 30);
-        ageText.setLocation(250, 200);
+        ageText.setSize(200, 30);
+        ageText.setLocation(200, 200);
         add(ageText);
 
         JButton button1 = new JButton("ADD");
@@ -56,14 +56,18 @@ public class AddPage extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    ObjectOutputStream outputStream = new ObjectOutputStream(parent.getSocket().getOutputStream());
+                    Socket socket = new Socket( "localhost", 3160);
+                    ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
 
                     Student student = new Student(nameText.getText(), surnameText.getText(), Integer.parseInt(ageText.getText()));
                     PackageData packageData = new PackageData("ADD_STUDENT", student);
                     outputStream.writeObject(packageData);
-                } catch (IOException ioException) {
-                    ioException.printStackTrace( );
+                    outputStream.reset();
+                } catch (Exception Exception) {
+                    Exception.printStackTrace( );
                 }
+                parent.getAddPage().setVisible(false);
+                parent.getMenu().setVisible(true);
             }
         });
 

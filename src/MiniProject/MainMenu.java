@@ -40,11 +40,13 @@ public class MainMenu extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 ArrayList <Student> students = new ArrayList<>();
                 try {
-                    ObjectInputStream inputStream = new ObjectInputStream(parent.getSocket().getInputStream());
-                    ObjectOutputStream outputStream = new ObjectOutputStream(parent.getSocket().getOutputStream());
+                    Socket socket = new Socket("localhost", 3160);
+                    ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+                    ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
 
                     PackageData packageData = new PackageData("LIST_STUDENTS");
                     outputStream.writeObject(packageData);
+                    outputStream.reset();
                     students = (ArrayList<Student>) inputStream.readObject();
                 } catch (Exception exception) {
                     exception.printStackTrace( );

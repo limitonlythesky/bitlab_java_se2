@@ -9,14 +9,12 @@ public class MainFrame extends JFrame {
     private MainMenu menu;
     private AddPage addPage;
     private ListPage listPage;
-    private Socket socket;
 
-    public MainFrame(Socket socket){
+    public MainFrame(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(500, 500);
         setTitle("Students Application");
         setLayout(null);
-        this.socket = socket;
 
         menu = new MainMenu(this);
         menu.setVisible(true);
@@ -41,9 +39,5 @@ public class MainFrame extends JFrame {
 
     public ListPage getListPage() {
         return listPage;
-    }
-
-    public Socket getSocket() {
-        return socket;
     }
 }
